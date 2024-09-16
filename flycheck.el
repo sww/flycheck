@@ -168,6 +168,7 @@
     html-tidy
     javascript-eslint
     javascript-jshint
+    javascript-oxlint
     javascript-standard
     json-jsonlint
     json-python-json
@@ -9971,6 +9972,24 @@ See URL `https://eslint.org/'."
            (not ;; `seq-contains-p' is only in seq >= 2.21
             (with-no-warnings (seq-contains error-code ?/)))
            `(url . ,(format url error-code))))))
+
+(flycheck-def-config-file-var flycheck-oxlintrc javascript-oxlint ".oxlintrc.json")
+
+(flycheck-define-checker javascript-oxlint
+  "A Javascript syntax checker using oxlint.
+
+See URL 'https://oxc.rs/'."
+  :command ("oxlint" "--format=unix"
+            (config-file "--config" flycheck-jshintrc)
+            "-"
+            source)
+  :working-directory flycheck-eslint--find-working-directory
+  :error-patterns
+  ((warning line-start (file-name) ":" line ":" column ":" (message) " [Warning]" line-end)
+   (error line-start (file-name) ":" line ":" column ":" (message) " [Error]" line-end))
+  :modes (js-mode js-jsx-mode js2-mode js2-jsx-mode js3-mode rjsx-mode
+                  typescript-mode js-ts-mode typescript-ts-mode tsx-ts-mode)
+)
 
 (flycheck-define-checker javascript-standard
   "A Javascript code and style checker for the (Semi-)Standard Style.
