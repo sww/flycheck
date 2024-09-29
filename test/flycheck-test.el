@@ -3908,6 +3908,21 @@ Perhaps:
          :id "no-unused-vars" :checker javascript-eslint
          :end-line 4 :end-column 12))))
 
+(flycheck-ert-def-checker-test javascript-oxlint javascript error
+  (let ((flycheck-disabled-checkers '(javascript-jshint))
+        (inhibit-message t))
+    (flycheck-ert-should-syntax-check
+     "language/javascript/syntax-error.js" flycheck-test-javascript-modes
+     '(3 25 error "Unexpected token" :checker javascript-oxlint))))
+
+(flycheck-ert-def-checker-test javascript-oxlint javascript warning
+  (let ((flycheck-disabled-checkers '(javascript-jshint))
+        (inhibit-message t))
+    (flycheck-ert-should-syntax-check
+     "language/javascript/warnings.js" flycheck-test-javascript-modes
+     '(4 9 warning "Variable 'foo' is declared but never used."
+         :checker javascript-oxlint))))
+
 (flycheck-ert-def-checker-test javascript-standard javascript error
   (let ((flycheck-checker 'javascript-standard)
         (inhibit-message t))

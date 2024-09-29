@@ -707,6 +707,12 @@ to view the docstring of the syntax checker.  Likewise, you may use
 
    Alternatively `javascript-standard` is used instead all of the former ones.
 
+   .. syntax-checker:: javascript-oxlint
+
+      Check syntax and lint with `oxlint <https://oxc.rs/>`_.
+
+      .. syntax-checker-config-file:: flycheck-oxlintrc
+
    .. syntax-checker:: javascript-eslint
 
       Check syntax and lint with `ESLint <https://eslint.org/>`_.
