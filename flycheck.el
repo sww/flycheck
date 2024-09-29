@@ -9980,7 +9980,7 @@ See URL `https://eslint.org/'."
 
 See URL 'https://oxc.rs/'."
   :command ("oxlint" "--format=unix"
-            (config-file "--config" flycheck-jshintrc)
+            (config-file "--config" flycheck-oxlintrc)
             "-"
             source)
   :working-directory flycheck-eslint--find-working-directory
